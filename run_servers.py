@@ -12,6 +12,12 @@ import subprocess
 import argparse
 from pathlib import Path
 
+if hasattr(sys.stdout, 'reconfigure'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 ROOT_DIR = Path(__file__).resolve().parent
 
 
@@ -84,13 +90,13 @@ def main():
             time.sleep(2.0)
 
         print("\n" + "=" * 75)
-        print("🎉 CREDIT RISK SCORING & EXPLAINABLE AI PLATFORM IS LIVE!")
+        print("[SUCCESS] CREDIT RISK SCORING & EXPLAINABLE AI PLATFORM IS LIVE!")
         print("=" * 75)
         if args.mode in ["all", "dashboard"]:
-            print(f"  📊 Streamlit Web UI:   http://localhost:{args.ui_port}")
+            print(f"  [>] Streamlit Web UI:   http://localhost:{args.ui_port}")
         if args.mode in ["all", "api"]:
-            print(f"  ⚡ FastAPI Swagger UI: http://127.0.0.1:{args.api_port}/docs")
-            print(f"  📖 FastAPI ReDoc:      http://127.0.0.1:{args.api_port}/redoc")
+            print(f"  [>] FastAPI Swagger UI: http://127.0.0.1:{args.api_port}/docs")
+            print(f"  [>] FastAPI ReDoc:      http://127.0.0.1:{args.api_port}/redoc")
         print("=" * 75)
         print("  Press Ctrl+C in this terminal window anytime to shut down servers.\n")
 
@@ -113,7 +119,7 @@ def main():
                 p.wait(timeout=3)
             except Exception:
                 p.kill()
-        print("[✓] All services stopped.")
+        print("[OK] All services stopped.")
 
 
 if __name__ == "__main__":
